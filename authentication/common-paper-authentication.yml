@@ -1,0 +1,42 @@
+generated: '2026-07-18'
+method: searched
+source: https://api.commonpaper.com/docs/authentication
+docs: https://api.commonpaper.com/docs/authentication
+note: >-
+  Common Paper's REST API and hosted MCP server both use Bearer-token
+  authentication. A single API token is supplied in the Authorization header; the
+  organization is inferred from the token (no organization-id header). Tokens are
+  generated from the account Integrations tab or minted programmatically via the
+  agentic provisioning flow. The end-user web application (app.commonpaper.com)
+  is fronted by Auth0. The API is served through a Zuplo gateway (token prefix
+  zpka_).
+summary:
+  types: [http]
+  http_schemes: [bearer]
+  api_key_in: [header]
+  oauth2_flows: []
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: 'Bearer <API token>'
+  token_prefix: zpka_
+  description: >-
+    Production API token. Generate from the account Integrations tab at
+    app.commonpaper.com, or obtain via the agentic provisioning flow. The org is
+    inferred from the token.
+provisioning:
+  description: >-
+    Two unauthenticated public gateway endpoints support agentic signup: mint a
+    single-use provision key, then redeem it for a new organization + admin user
+    and receive a production API key.
+  endpoints:
+  - POST /v1/keys      # mint a one-time provision key (contact_email required)
+  - POST /v1/accounts  # redeem provision key -> new org + production api_key
+  rate_limits: 5 req/minute, 50 req/day per IP (provision key minting)
+app_login:
+  provider: Auth0
+  signup: https://app.commonpaper.com/auth/auth0?screen_hint=signup
+  signin: https://app.commonpaper.com/auth/auth0?screen_hint=signin
