@@ -1,0 +1,58 @@
+generated: '2026-07-18'
+method: searched
+status: published
+source: https://api.commonpaper.com/docs/api
+note: >-
+  Common Paper runs an official hosted MCP server. The endpoint POST
+  https://api.commonpaper.com/mcp is listed in the API reference and responds
+  with an RFC 9457 problem+json 401 ("Bearer token required") when called
+  unauthenticated, confirming a live, auth-gated Model Context Protocol server
+  that fronts the same contract/agreement surface as the REST API.
+server:
+  name: common-paper
+  transport: http
+  url: https://api.commonpaper.com/mcp
+  authentication:
+    type: http
+    scheme: bearer
+    description: >-
+      Requires an Authorization: Bearer <API key> header; the same production
+      API token used for the REST API (generated from the account Integrations
+      tab, or minted via the agentic provisioning flow).
+verification:
+  probe: 'POST https://api.commonpaper.com/mcp (initialize) -> HTTP 401'
+  response_format: application/problem+json (https://httpproblems.com/http-status/401)
+  probed: '2026-07-18'
+tools_note: >-
+  The concrete tool list is only returned to authenticated clients. The tools
+  below are candidate mappings derived from the documented REST operations the
+  server fronts; they are not verified against a live tools/list response.
+tools:
+- name: list_agreements
+  description: List/search/count agreements with Ransack filters and pagination
+  source_operation: GET /v1/agreements
+  status: candidate
+- name: get_agreement
+  description: Get a single agreement by id
+  source_operation: GET /v1/agreements/{id}
+  status: candidate
+- name: create_agreement
+  description: Create an agreement (optionally as a draft) from a template
+  source_operation: POST /v1/agreements
+  status: candidate
+- name: send_agreement
+  description: Send a draft agreement to the recipient
+  source_operation: POST /v1/agreements/{id}/send
+  status: candidate
+- name: void_agreement
+  description: Void an agreement
+  source_operation: PATCH /v1/agreements/{id}/void
+  status: candidate
+- name: list_templates
+  description: List agreement templates
+  source_operation: GET /v1/templates
+  status: candidate
+- name: create_template
+  description: Create a new agreement template
+  source_operation: POST /v1/templates
+  status: candidate

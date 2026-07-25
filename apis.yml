@@ -1,26 +1,146 @@
 aid: common-paper
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/common-paper.png
 name: Common Paper
-description: Common Paper is a company surfaced as a portfolio company of uncork-capital and added to
-  the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Common Paper is a contract management platform that helps revenue, legal, and
+  operations teams build, negotiate, sign, and manage commercial agreements in
+  minutes using a library of committee-drafted standard agreements (Cloud Service
+  Agreement, Mutual NDA, DPA, BAA, Professional Services, Partnership, Software
+  License, Pilot, Design Partner, and Letter of Intent) paired with AI-assisted
+  contract review. The company exposes a public REST API at api.commonpaper.com/v1
+  with Bearer-token authentication, JSON:API read responses, Ransack filtering,
+  offset pagination, a documented webhook catalog, an agentic account-provisioning
+  flow, and an official hosted MCP server plus a published Claude agent skill, so
+  agents and integrations can list, create, send, void, reassign, and download
+  agreements and templates programmatically.
 url: https://raw.githubusercontent.com/api-evangelist/common-paper/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - uncork-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profile
+x-tier-reason: portfolio-lead-enriched
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
-apis: []
+- Contracts
+- Contract Management
+- Legal Tech
+- Agreements
+- SaaS Contracts
+- E-Signature
+- API
+- Webhooks
+- MCP
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- name: Common Paper API
+  description: >-
+    REST API for managing Common Paper agreements and templates — list, create,
+    send, void, reassign, download, and share agreements; manage templates,
+    attachments, users, organizations, invitations, and agreement history; plus
+    an agentic account-provisioning flow (mint-key / redeem-for-account) and a
+    hosted MCP endpoint. Bearer-token auth, JSON:API reads, Ransack filtering,
+    offset pagination.
+  humanURL: https://api.commonpaper.com/docs
+  baseURL: https://api.commonpaper.com/v1
+  tags:
+  - Contracts
+  - Agreements
+  - Templates
+  - Legal Tech
+  properties:
+  - type: Documentation
+    url: https://api.commonpaper.com/docs
+  - type: APIReference
+    url: https://api.commonpaper.com/docs/api
+  - type: Authentication
+    url: authentication/common-paper-authentication.yml
+  - type: Conventions
+    url: conventions/common-paper-conventions.yml
+  - type: ErrorCatalog
+    url: errors/common-paper-problem-types.yml
+  - type: DataModel
+    url: data-model/common-paper-data-model.yml
+  - type: Conformance
+    url: conformance/common-paper-conformance.yml
+  - type: Webhooks
+    url: asyncapi/common-paper-webhooks.yml
+  - type: MCPServer
+    url: mcp/common-paper-mcp.yml
 common:
+- type: DomainSecurity
+  url: security/common-paper-domain-security.yml
 - type: Website
   url: https://commonpaper.com
+- type: DeveloperPortal
+  url: https://api.commonpaper.com/docs
+- type: Documentation
+  url: https://api.commonpaper.com/docs
+- type: APIReference
+  url: https://api.commonpaper.com/docs/api
+- type: GettingStarted
+  url: https://api.commonpaper.com/docs
+- type: Authentication
+  url: authentication/common-paper-authentication.yml
+- type: MCPServer
+  url: mcp/common-paper-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Webhooks
+  url: asyncapi/common-paper-webhooks.yml
+- type: LLMsTxt
+  url: llms/common-paper-llms.txt
+- type: Conventions
+  url: conventions/common-paper-conventions.yml
+- type: ErrorCatalog
+  url: errors/common-paper-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/common-paper-lifecycle.yml
+- type: StatusPage
+  url: https://status.commonpaper.com/
+- type: Conformance
+  url: conformance/common-paper-conformance.yml
+- type: DataModel
+  url: data-model/common-paper-data-model.yml
+- type: TrustCenter
+  url: https://trust.commonpaper.com/
+- type: Support
+  url: https://help.commonpaper.com/en/
+- type: Blog
+  url: https://commonpaper.com/blog
+- type: GitHubOrganization
+  url: https://github.com/commonpaper
+- type: Pricing
+  url: https://commonpaper.com/pricing
+- type: SignUp
+  url: https://app.commonpaper.com/auth/auth0?screen_hint=signup
+- type: Login
+  url: https://app.commonpaper.com/auth/auth0?screen_hint=signin
+- type: TermsOfService
+  url: https://commonpaper.com/website-terms-of-use
+- type: PrivacyPolicy
+  url: https://commonpaper.com/privacy-policy
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

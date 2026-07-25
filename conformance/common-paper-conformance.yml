@@ -1,0 +1,38 @@
+generated: '2026-07-18'
+method: searched
+source: https://api.commonpaper.com/docs
+note: >-
+  Cross-cutting standards conformance for the Common Paper v1 REST API, asserted
+  from the developer docs, the official agent skill, and a verified live probe of
+  the error format. This is a standards-conformance assertion, not a published
+  compliance-certification claim — no Compliance pointer is emitted because no
+  named security certification (SOC 2 / ISO 27001 / etc.) was verified on the
+  public trust center.
+standards:
+- id: rfc9457-problem-details
+  conforms: true
+  evidence: >-
+    Error responses use application/problem+json with type/title/status/detail/
+    instance; verified live on POST /v1/mcp -> 401.
+- id: jsonapi
+  conforms: true
+  evidence: >-
+    Read/list responses use JSON:API shape (data[].type/attributes/links, meta,
+    top-level links). Note: the create-agreement endpoint intentionally uses a
+    flat non-JSON:API body.
+- id: pagination
+  conforms: true
+  evidence: Offset pagination via page[number]/page[size] with meta.pagination.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    API uses Bearer API tokens (org inferred from token), not an OAuth2
+    authorization-code/client-credentials flow. The web app login is Auth0-based.
+- id: oidc
+  conforms: false
+- id: idempotency
+  conforms: false
+  evidence: No documented request idempotency-key header.
+- id: webhooks
+  conforms: true
+  evidence: Documented webhook event catalog (13 event types) with JSON payloads.

@@ -1,0 +1,65 @@
+generated: '2026-07-18'
+method: searched
+format: rfc9457
+source: https://api.commonpaper.com/docs/provision_keys
+docs:
+- https://api.commonpaper.com/docs/provision_keys
+- https://api.commonpaper.com/docs/api
+note: >-
+  Common Paper returns RFC 9457 problem+json error responses. The type URI points
+  at https://httpproblems.com/http-status/<code>, with title, status, detail,
+  instance, and a trace object (timestamp, requestId, buildId, rayId). The
+  problems below are documented in the API reference, provisioning docs, and the
+  official agent skill's error-handling guidance. Verified live: an
+  unauthenticated POST /v1/mcp returned application/problem+json with type
+  https://httpproblems.com/http-status/401.
+envelope:
+  media_type: application/problem+json
+  type_base: https://httpproblems.com/http-status/
+  fields: [type, title, status, detail, instance, trace]
+problems:
+- status: 400
+  type: https://httpproblems.com/http-status/400
+  title: Bad Request
+  detail: >-
+    Request body schema is wrong. The create-agreement endpoint uses a flat
+    format (owner_email / template_id / agreement{}), NOT JSON:API.
+- status: 401
+  type: https://httpproblems.com/http-status/401
+  title: Unauthorized
+  detail: Bearer token required, invalid, or expired.
+  verified: 'POST /v1/mcp unauthenticated -> 401 (2026-07-18)'
+- status: 403
+  type: https://httpproblems.com/http-status/403
+  title: Forbidden
+  detail: >-
+    "You've reached your plan limit" — on a new account this usually means the
+    user's email is not yet verified (check email_verified on GET /v1/users)
+    rather than an actual plan-limit breach.
+- status: 404
+  type: https://httpproblems.com/http-status/404
+  title: Not Found
+  detail: Agreement, template, or provision key does not exist.
+- status: 409
+  type: https://httpproblems.com/http-status/409
+  title: Conflict
+  detail: Email already in use (account provisioning redemption).
+- status: 410
+  type: https://httpproblems.com/http-status/410
+  title: Gone
+  detail: Provision key has already been redeemed (single-use).
+- status: 422
+  type: https://httpproblems.com/http-status/422
+  title: Unprocessable Entity
+  detail: >-
+    Invalid filter or request body; missing required field; sending an agreement
+    that is not in draft status; or a throwaway/invalid contact email on
+    provision-key minting.
+- status: 429
+  type: https://httpproblems.com/http-status/429
+  title: Too Many Requests
+  detail: 'Rate limit exceeded (e.g., provision-key minting: 5/min, 50/day per IP).'
+- status: 502
+  type: https://httpproblems.com/http-status/502
+  title: Bad Gateway
+  detail: Upstream Zuplo or Auth0 failure during account provisioning.

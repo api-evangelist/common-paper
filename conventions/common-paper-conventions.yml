@@ -1,0 +1,73 @@
+generated: '2026-07-18'
+method: searched
+source: https://api.commonpaper.com/docs
+docs:
+- https://api.commonpaper.com/docs/authentication
+- https://api.commonpaper.com/docs/pagination
+- https://api.commonpaper.com/docs/filtering
+- https://api.commonpaper.com/docs/webhooks
+note: >-
+  Cross-cutting request/response semantics for the Common Paper v1 REST API,
+  captured from the developer docs and the official agent skill.
+base_url: https://api.commonpaper.com/v1
+authentication:
+  style: bearer-token
+  header: 'Authorization: Bearer <API token>'
+  ref: authentication/common-paper-authentication.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  ref: lifecycle/common-paper-lifecycle.yml
+serialization:
+  reads: JSON:API (data[].attributes, meta, links)
+  create_agreement: >-
+    NOT JSON:API — flat body with top-level owner_email, template_id, draft, and
+    a nested agreement{} object
+  content_types:
+  - application/json
+  - multipart/form-data (attachment upload)
+pagination:
+  style: offset (page-number)
+  params:
+    number: page[number]   # default 1, must be > 0; URL-encode as page%5Bnumber%5D
+    size: page[size]       # default 15; URL-encode as page%5Bsize%5D
+  response_fields:
+    location: meta.pagination
+    fields: [current, next, last, records]
+  counting_tip: request page[size]=1 and read meta.pagination.records
+filtering:
+  style: Ransack predicates
+  syntax: filter[field_predicate]=value
+  predicates: [_eq, _not_eq, _cont, _i_cont, _gt, _lt, _gteq, _lteq, _present, _blank, _in, _null, _not_null]
+  examples:
+  - filter[status_eq]=signed
+  - filter[recipient_organization_cont]=microsoft
+  - filter[end_date_gteq]=2025-01-01
+  encoding_note: >-
+    Square brackets must be URL-encoded (%5B / %5D) to avoid shell/gateway errors.
+sorting:
+  param: sort
+  example: sort=end_date
+list_response_modes:
+  compact: default; omits type-specific nested attributes
+  full: pass full=true to include nested type-specific attributes (agreements, templates)
+idempotency:
+  supported: false
+  note: >-
+    Common Paper does not document a request idempotency-key header. Provision
+    keys (POST /v1/keys -> /v1/accounts) are single-use (410 Gone once redeemed),
+    which is resource-level single-use semantics, not general request idempotency.
+error_envelope:
+  format: rfc9457
+  media_type: application/problem+json
+  type_base: https://httpproblems.com/http-status/
+  fields: [type, title, status, detail, instance, trace]
+  ref: errors/common-paper-problem-types.yml
+rate_limiting:
+  documented_signal: >-
+    Provision-key minting is rate-limited (5/min, 50/day per IP, 429 on excess).
+    General per-endpoint rate-limit response headers are not documented.
+request_tracing:
+  note: >-
+    Error responses include a trace object with requestId, buildId, rayId, and
+    timestamp (Cloudflare/Zuplo gateway), useful for support correlation.

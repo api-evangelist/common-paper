@@ -1,0 +1,119 @@
+generated: '2026-07-18'
+method: searched
+source: https://api.commonpaper.com/docs/api
+note: >-
+  Entity-relationship graph for the Common Paper API, derived from the documented
+  REST resource surface and the object attributes/filters described in the API
+  reference and official agent skill. No OpenAPI is published, so relationships
+  are read from documented id-reference fields and nested attribute prefixes.
+entities:
+- name: organization
+  description: A tenant/account; the API token is scoped to a single organization.
+  endpoints:
+  - 'GET /v1/organizations'
+  - 'GET /v1/organizations/{id}'
+  - 'PATCH /v1/organizations/{id}'
+  key_attributes: [name, street_address, city, state, zipcode, country, onboarded]
+- name: user
+  description: A member of an organization; senders/signers reference users.
+  endpoints:
+  - 'GET /v1/users'
+  - 'GET /v1/users/{id}'
+  key_attributes: [name, email, title, email_verified, organization_id]
+- name: template
+  description: >-
+    A reusable agreement configuration of a given type (NDA, CSA, DPA, PSA, etc.)
+    that agreements are created from.
+  endpoints:
+  - 'GET /v1/templates'
+  - 'GET /v1/templates/{id}'
+  - 'POST /v1/templates'
+  - 'PATCH /v1/templates/{id}'
+  id_prefix_note: response type field e.g. template_nda, template_csa, template_dpa
+  key_attributes: [name, type, agreement_type, version, governing_law_region, organization_id]
+- name: agreement
+  description: A commercial contract instance created from a template and sent to a recipient.
+  endpoints:
+  - 'GET /v1/agreements'
+  - 'GET /v1/agreements/{id}'
+  - 'POST /v1/agreements'
+  - 'POST /v1/agreements/{id}/send'
+  - 'PATCH /v1/agreements/{id}/void'
+  - 'PATCH /v1/agreements/{id}/reassign'
+  - 'PATCH /v1/agreements/{id}/resend_email'
+  - 'GET /v1/agreements/{id}/download_pdf'
+  - 'GET /v1/agreements/{id}/shareable_link'
+  key_attributes:
+  - agreement_type
+  - status
+  - display_status
+  - sender_signer_email
+  - recipient_email
+  - recipient_organization
+  - effective_date
+  - end_date
+  - ai_gmv
+  - ai_arr
+- name: agreement_history
+  description: Event history entries for an agreement.
+  endpoints:
+  - 'GET /v1/agreement_history'
+  - 'GET /v1/agreements/{id}/history'
+- name: attachment
+  description: Uploaded file (PDF policy/addendum) referenced from templates/agreements.
+  endpoints:
+  - 'GET /v1/attachments'
+  - 'POST /v1/attachments'
+  - 'DELETE /v1/attachments/{id}'
+  key_attributes: [name, description, uploaded_by, pdf]
+- name: invitation
+  description: An invitation to a user.
+  endpoints:
+  - 'GET /v1/invitations'
+  - 'GET /v1/invitations/{id}'
+  - 'POST /v1/invitations'
+- name: agreement_type
+  description: Enumeration resource of supported agreement types.
+  endpoints:
+  - 'GET /v1/agreement_types'
+- name: agreement_status
+  description: Enumeration resource of agreement statuses.
+  endpoints:
+  - 'GET /v1/agreement_statuses'
+relationships:
+- from: user
+  to: organization
+  kind: belongs_to
+  via: organization_id
+- from: template
+  to: organization
+  kind: belongs_to
+  via: organization_id
+- from: agreement
+  to: template
+  kind: belongs_to
+  via: template_id
+- from: agreement
+  to: user
+  kind: has_one
+  via: owner_email / sender_signer_email
+- from: agreement
+  to: user
+  kind: has_many
+  via: cc_users / agreement_roles_user_email
+- from: agreement
+  to: agreement_history
+  kind: has_many
+  via: agreement_id
+- from: agreement
+  to: attachment
+  kind: has_many
+  via: include_*_attachment_id
+- from: template
+  to: attachment
+  kind: has_many
+  via: include_*_attachment_id
+- from: invitation
+  to: organization
+  kind: belongs_to
+  via: organization

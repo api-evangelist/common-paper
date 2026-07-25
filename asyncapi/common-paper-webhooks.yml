@@ -1,0 +1,54 @@
+generated: '2026-07-18'
+method: searched
+spec_type: Webhooks
+source: https://api.commonpaper.com/docs/webhooks
+note: >-
+  Common Paper documents a webhook event surface (no published AsyncAPI). Webhooks
+  are configured in the account Settings section by providing a destination URL.
+  Each event POSTs a flat JSON payload describing the agreement and the event.
+  The docs do not describe HMAC signature verification.
+delivery:
+  transport: https-webhook
+  configuration: Settings section of the Common Paper account (destination URL only)
+  signature_verification: not documented
+payload_fields:
+- agreement_id (uuid)
+- agreement_type (string)
+- template_name (string)
+- url (string)
+- sender_email (string)
+- sender_name (string)
+- recipient_organization (string)
+- recipient_email (string)
+- recipient_name (string)
+- status (string)
+- event_type (string)
+- event_date (timestamp, UTC)
+- event_description (string)
+events:
+- event: sent
+  description: Sender sends the agreement
+- event: reassign
+  description: Sender reassigns to a new recipient
+- event: voided
+  description: Sender voids the agreement
+- event: viewed
+  description: Recipient views the agreement
+- event: reassigned
+  description: Recipient reassigns to a different person
+- event: declined
+  description: Recipient declines the agreement
+- event: signed
+  description: Recipient signs, or sender/signer signs
+- event: proposed changes
+  description: Recipient proposes changes, or sender counter-proposes
+- event: sent reminder
+  description: Sender sends a reminder email
+- event: downloaded PDF
+  description: Recipient downloaded the PDF version
+- event: downloaded Word document (DOCX)
+  description: Recipient downloaded the DOCX version
+- event: sent for signature
+  description: Sender sent the agreement for signature
+- event: completed
+  description: Both parties have signed

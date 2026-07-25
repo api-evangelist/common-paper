@@ -1,0 +1,30 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/commonpaper/claude-skill
+note: >-
+  Official Common Paper agent skill, published by the provider at
+  github.com/commonpaper/claude-skill and saved verbatim. Covers querying and
+  managing contracts via the Common Paper REST API, the agentic account
+  provisioning flow, and a guided onboarding mode.
+skills:
+- file: commonpaper-skill.md
+  name: commonpaper
+  official: true
+  description: >-
+    Query and manage contracts via the Common Paper REST API — list/count/search
+    agreements, create/send/void/reassign agreements, create and update
+    templates, upload attachments, provision new accounts, and run guided
+    onboarding.
+  api: https://api.commonpaper.com/v1
+  operations:
+  - GET /v1/agreements
+  - POST /v1/agreements
+  - POST /v1/agreements/{id}/send
+  - PATCH /v1/agreements/{id}/void
+  - PATCH /v1/agreements/{id}/reassign
+  - GET /v1/templates
+  - POST /v1/templates
+  - PATCH /v1/templates/{id}
+  - POST /v1/attachments
+  - POST /v1/keys
+  - POST /v1/accounts

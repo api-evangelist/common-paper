@@ -1,0 +1,28 @@
+generated: '2026-07-18'
+method: searched
+source: https://api.commonpaper.com/docs
+note: >-
+  Versioning and operational-transparency posture for the Common Paper API,
+  captured from the developer docs and site footer. The API is URI-path versioned
+  at v1. A public status page is published. No formal deprecation/sunset policy
+  (RFC 8594 Sunset/Deprecation headers) or SLA document was found published.
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://api.commonpaper.com/v1
+  docs: https://api.commonpaper.com/docs
+standard_agreement_versioning:
+  note: >-
+    Separately from the API, Common Paper's standard legal agreements are
+    version-numbered (e.g., the Cloud Service Agreement has v1.0, v2.0, and the
+    current v2.1); the create-template endpoint accepts standard_version to pin
+    a CSA version.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  status: not-published
+sla:
+  url: null
+  status: not-published
+status_page: https://status.commonpaper.com/
+deprecated_operations: []
