@@ -59,3 +59,15 @@ deployment:
   probe: gated
   checked: '2026-08-12'
   source: catalog MCP census
+rfc9728:
+  endpoint: https://api.commonpaper.com/mcp
+  metadata_url: https://api.commonpaper.com/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://api.commonpaper.com/mcp
+    authorization_servers:
+    - https://dev-5g9f1d1h.us.auth0.com/
+    resource_name: MCP OAuth Resource
