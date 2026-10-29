@@ -64,6 +64,110 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Common Paper is a company surfaced as a portfolio company of uncork-capital and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Common Paper is a contract management platform that helps revenue, legal, and operations teams build, negotiate, sign, and manage commercial agreements in minutes using a library of committee-drafted standard agreements (Cloud Service Agreement, Mutual NDA, DPA, BAA, Professional Services, Partnership, Software License, Pilot, Design Partner, and Letter of Intent) paired with AI-assisted contract review. The company exposes a public REST API at api.commonpaper.com/v1 with Bearer-token authentication, JSON:API read responses, Ransack filtering, offset pagination, a documented webhook catalog, an agentic account-provisioning flow, and an official hosted MCP server plus a published Claude agent skill, so agents and integrations can list, create, send, void, reassign, and download agreements and templates programmatically.
 
-Backed by: uncork-capital — https://commonpaper.com
+**Areas:** Company · Contracts · Contract Management · Legal Tech · Agreements · SaaS Contracts · E-Signature · Webhook · MCP
+
+## Common Paper on APIs.io
+
+Everything profiled for Common Paper is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/common-paper/](https://apis.io/providers/common-paper/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Common Paper API](https://apis.io/apis/common-paper/common-paper-api/) — REST API for managing Common Paper agreements and templates — list, create, send, void, reassign, download, and share agreements; manage templates,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Common Paper Webhooks](https://apis.io/asyncapis/common-paper/common-paper-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [common-paper](https://apis.io/servers/common-paper/common-paper/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Common Paper Authentication](https://apis.io/security/common-paper/common-paper-authentication/)
+- [Common Paper Domain Security](https://apis.io/security/common-paper/common-paper-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://commonpaper.com)
+- [Documentation](https://api.commonpaper.com/docs)
+- [Getting started](https://api.commonpaper.com/docs)
+- [API reference](https://api.commonpaper.com/docs/api)
+- [Pricing](https://commonpaper.com/pricing)
+- [Sign up](https://app.commonpaper.com/auth/auth0?screen_hint=signup)
+- [Support](https://help.commonpaper.com/en/)
+- [Blog](https://commonpaper.com/blog)
+- [Trust centre](https://trust.commonpaper.com/)
+- [Terms of service](https://commonpaper.com/website-terms-of-use)
+- [Privacy policy](https://commonpaper.com/privacy-policy)
+- [GitHub](https://github.com/commonpaper)
+- [Status](https://status.commonpaper.com/)
+
+## API Evangelist rating
+
+**Kin Score 45.0** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 44.7 |
+
+**Agent readiness 51.1** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/common-paper/](https://apis.io/providers/common-paper/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Common Paper: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/common-paper/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
